@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  mgroup-gateway:
+    build: ./mgroup-gateway
+    container_name: mgroup-gateway
+    ports:
+      - 8090:8090
+    depends_on:
+      - mgroup-stats-service
+      - mgroup-offers-service
+      - mgroup-delivery-service
+      - mgroup-order-service
+      - mgroup-onec-service
+      - mgroup-multibonus-service
+      - mgroup-ozon-service
+      - mgroup-yamarket-service
+      - mgroup-sbermarket-service
+      - mgroup-supplier-service
+    environment:
+      - STATS_SERVICE_SERVER_URL=http://mgroup-stats-service:8091
+      - DELIVERY_SERVICE_SERVER_URL=http://mgroup-delivery-service:8093
+      - OFFERS_SERVICE_SERVER_URL=http://mgroup-offers-service:8095
+      - ORDER_SERVICE_SERVER_URL=http:mgroup-order-service:8097
+      - ONEC_SERVICE_SERVER_URL=http:mgroup-onec-service:8099
+      - MULTIBONUS_SERVICE_SERVER_URL=http:mgroup-multibonus-service:8191
+      - OZON_SERVICE_SERVER_URL=http:mgroup-ozon-service:8193
+      - YAMARKET_SERVICE_SERVER_URL=http:mgroup-yamarket-service:8195
+      - SBERMARKET_SERVICE_SERVER_URL=http:mgroup-sbermarket-service:8197
+      - SUPPLIER_SERVICE_SERVER_URL=http:mgroup-supplier-service:8199
+    #restart: always
+  mgroup-stats-service:
+    build: ./mgroup-stats-service
+    container_name: mgroup-stats-service
+    ports:
+      - 8091:8091
+    depends_on:
+      - stats-postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-postgres:5432/dbstats
+      - POSTGRES_USER=*******************
+      - POSTGRES_PASSWORD=*******************
+    #restart: always
+  stats-postgres:
+    image: postgres:13.3
+    container_name: stats-postgres
+    volumes:
+      - /var/lib/postgresql/data/
+    ports:
+      - 6541:5432
+    environment:
+      - POSTGRES_DB=dbstats
+      - POSTGRES_USER=*******************
+      - POSTGRES_PASSWORD=*******************
+####--DEL--####

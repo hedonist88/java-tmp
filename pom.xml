@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>ru.mgroup</groupId>
+    <artifactId>java-mgroup</artifactId>
+    <version>1.0-RELEASE</version>
+
+    <name>MGroup</name>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>mgroup-gateway</module>
+        <module>mgroup-stats-service</module>
+        <module>mgroup-delivery-service</module>
+        <module>mgroup-offers-service</module>
+        <module>mgroup-multibonus-service</module>
+        <module>mgroup-ozon-service</module>
+        <module>mgroup-sbermarket-service</module>
+        <module>mgroup-yamarket-service</module>
+        <module>mgroup-supplier-service</module>
+        <module>mgroup-onec-service</module>
+        <module>mgroup-order-service</module>
+    </modules>
+
+</project>

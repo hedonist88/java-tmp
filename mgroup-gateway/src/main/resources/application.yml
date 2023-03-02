@@ -1,0 +1,35 @@
+server:
+  port: 8090
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#debug
+#logging:
+#  level:
+#    reactor:
+#      netty: INFO
+#    org:
+#      springframework:
+#        cloud:
+#          gateway: TRACE
+spring:
+  application:
+    name: mgroup-gateway-service
+  cloud:
+    gateway:
+      #debug
+      #httpclient:
+      #  wiretap: true
+      #  httpserver:
+      #    wiretap: true
+      routes:
+        - id: stat-hit
+          uri: ${STATS_SERVICE_SERVER_URL:http://localhost:8091}
+          predicates:
+            - Path=/statistics/**
+          filters:
+            - AuthFilter
+            - AddRequestHeader=Content-Type,application/json
+####--DEL--####
